@@ -2,11 +2,15 @@ package com.example.fitnessfreak;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -76,11 +80,35 @@ public class EditProfile extends AppCompatActivity {
                 GoalWeight.setText(documentSnapshot.getString("Goal Weight"));
                 Height.setText(documentSnapshot.getString("Height"));
 
-                if (documentSnapshot.getString("Sex").equals("Male")){
+                if (documentSnapshot.getString("Sex").equals("Male")) {
                     Sex.setSelection(0);
+                } else {
+                    Sex.setSelection(1);
+                }
+            }
+        });
+
+
+        BtnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(FirstName.getText()) || TextUtils.isEmpty(Surname.getText()) || TextUtils.isEmpty(CalorieGoal.getText()) || TextUtils.isEmpty(CurrentWeight.getText()) || TextUtils.isEmpty(GoalWeight.getText()) || TextUtils.isEmpty(Height.getText())) {
+                    Toast.makeText(getApplicationContext(), "Enter values for all the items above", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Sex.setSelection(1);
+                    DocumentReference documentReference = fStore.collection("Users").document(userID);
+                    documentReference.update("First Name", FirstName.getText().toString());
+                    documentReference.update("Surname", Surname.getText().toString());
+                    documentReference.update("Calorie Goal", CalorieGoal.getText().toString());
+                    documentReference.update("Weight", CurrentWeight.getText().toString());
+                    documentReference.update("Goal Weight", GoalWeight.getText().toString());
+                    documentReference.update("Height", Height.getText().toString());
+                    documentReference.update("Sex", Sex.getSelectedItem().toString());
+
+                    Toast.makeText(getApplicationContext(), "Values have been edited and updated!", Toast.LENGTH_SHORT).show();
+
+                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                    finish();
                 }
             }
         });
