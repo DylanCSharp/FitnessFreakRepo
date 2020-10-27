@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfile">
+
+    <TextView
+        android:id="@+id/TVEditProfileHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="EDIT PROFILE"
+        android:textAlignment="center"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="30dp"/>
+
+
+
+    <EditText
+        android:id="@+id/ETEditCalorieGoal"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ETEditSurname"
+        android:layout_marginTop="20dp"
+        android:hint="Calorie Goal"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/ETEditFirstName"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/TVEditProfileHeading"
+        android:layout_marginTop="15dp"
+        android:hint="First Name" />
+
+    <EditText
+        android:id="@+id/ETEditSurname"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ETEditFirstName"
+        android:layout_marginTop="15dp"
+        android:hint="Surname"
+
+        />
+
+    <EditText
+        android:id="@+id/ETEditGoalWeight"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:hint="Goal Weight"
+        android:layout_below="@+id/ETEditCurrentWeight"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/ETEditHeight"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:hint="Height"
+        android:layout_below="@+id/ETEditGoalWeight"
+        android:inputType="number" />
+
+    <Spinner
+        android:id="@+id/EditSpinSex"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ETEditHeight"
+        android:layout_marginTop="25dp"
+        />
+
+    <EditText
+        android:id="@+id/ETEditCurrentWeight"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:hint="Current Weight"
+        android:layout_below="@+id/ETEditCalorieGoal"
+        android:inputType="number"
+        />
+
+    <Button
+        android:id="@+id/BtnSaveEdit"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:layout_below="@id/EditSpinSex"
+        android:text="SAVE" />
+
+
+</RelativeLayout>

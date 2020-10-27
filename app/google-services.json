@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "123048444686",
+    "firebase_url": "https://fitness-freak-database.firebaseio.com",
+    "project_id": "fitness-freak-database",
+    "storage_bucket": "fitness-freak-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123048444686:android:eb2aef3b50448b02668d5f",
+        "android_client_info": {
+          "package_name": "com.example.fitnessfreak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123048444686-u8ooe4f5k0rvl8aiqmg33gft12v0r1f1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUUUwjhp4N14vuc1GExRz3F1ckzg4clAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123048444686-u8ooe4f5k0rvl8aiqmg33gft12v0r1f1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+    <TextView
+        android:id="@+id/TVProfileHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PROFILE"
+        android:textAlignment="center"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="30dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/TVProfileHeading"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:textAlignment="center"
+        android:text="Edit Profile"
+        android:textAllCaps="false"
+        android:id="@+id/BtnEditProfile"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Weight: "
+        android:id="@+id/TVCurrentWeight"
+        android:layout_below="@+id/TVProfileHeading"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Goal Weight: "
+        android:id="@+id/TVGoalWeight"
+        android:layout_below="@+id/TVCurrentWeight"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/TVGoalWeight"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/TVGoalWeight">
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Weight Logs:"
+            android:textAlignment="center"
+            />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/LinearLog"
+                android:orientation="horizontal" />
+
+    </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+</RelativeLayout>

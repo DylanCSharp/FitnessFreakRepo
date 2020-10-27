@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:hint="Enter Email"
+        android:textAlignment="center"
+        android:id="@+id/TxbRegisterEmail"
+        android:inputType="textEmailAddress"
+        >
+    </EditText>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_below="@+id/TxbRegisterEmail"
+        android:hint="Enter Password"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:id="@+id/TxbRegisterPassword"
+        android:inputType="textPassword"
+        >
+    </EditText>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/TxbRegisterPassword"
+        android:layout_marginTop="20dp"
+        android:text="REGISTER"
+        android:id="@+id/BtnRegister"
+        >
+    </Button>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/RegisterProgress"
+        android:layout_below="@+id/TVSignIN"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:visibility="invisible"
+        >
+    </ProgressBar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TVSignIN"
+        android:text="Already have an account? Sign In."
+        android:textColor="@color/common_google_signin_btn_text_light"
+        android:layout_below="@+id/BtnRegister"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        >
+    </TextView>
+
+</RelativeLayout>

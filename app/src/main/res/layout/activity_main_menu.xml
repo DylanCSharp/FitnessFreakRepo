@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainMenu">
+
+
+    <TextView
+        android:id="@+id/TVHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:textSize="40dp"
+        android:textColor="@color/cardview_dark_background"
+        android:textAlignment="center"
+        ></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About Us"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="25dp"
+        android:textSize="30dp"
+        android:layout_below="@+id/TVHeading"
+        android:textColor="@color/cardview_dark_background"
+        ></TextView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="10dp"
+        android:text="LOGOUT"
+        android:onClick="Logout"
+        />
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:padding="10dp"
+        >
+        <Button
+            android:id="@+id/BtnMainRecipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="RECIPES"
+            android:layout_marginRight="5dp"
+            />
+        <Button
+            android:id="@+id/BtnMainAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD"
+            android:layout_marginRight="5dp"
+            />
+
+        <Button
+            android:id="@+id/BtnMainWorkout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WORKOUT"
+            android:layout_marginRight="5dp"
+            />
+
+        <Button
+            android:id="@+id/BtnMainProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PROFILE"
+            />
+
+    </TableRow>
+
+</RelativeLayout>
