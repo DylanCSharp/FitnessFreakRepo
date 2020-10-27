@@ -70,7 +70,6 @@ public class EditProfile extends AppCompatActivity {
         FirstName = findViewById(R.id.ETEditFirstName);
         Surname = findViewById(R.id.ETEditSurname);
         CalorieGoal = findViewById(R.id.ETEditCalorieGoal);
-        //Add to logs as well
         CurrentWeight = findViewById(R.id.ETEditCurrentWeight);
         GoalWeight = findViewById(R.id.ETEditGoalWeight);
         Height = findViewById(R.id.ETEditHeight);
@@ -126,9 +125,6 @@ public class EditProfile extends AppCompatActivity {
                             finish();
                         }
                     });
-
-
-
                 }
             }
         });
