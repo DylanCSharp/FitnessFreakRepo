@@ -16,7 +16,6 @@
         android:textSize="30dp"/>
 
 
-
     <EditText
         android:id="@+id/ETEditCalorieGoal"
         android:layout_width="150dp"
@@ -86,14 +85,30 @@
         android:layout_below="@+id/ETEditCalorieGoal"
         android:inputType="number"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/EditSpinSex"
+        android:id="@+id/TVMeasurement"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Measurements: (Left = Imperial, Right = Metric)"/>
+
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TVMeasurement"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/SwitchMeasure"
+        />
 
     <Button
         android:id="@+id/BtnSaveEdit"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:layout_below="@id/EditSpinSex"
+        android:layout_below="@id/SwitchMeasure"
         android:text="SAVE" />
 
 
