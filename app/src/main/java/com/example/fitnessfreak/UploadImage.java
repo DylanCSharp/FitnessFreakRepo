@@ -31,7 +31,6 @@ public class UploadImage extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private Button BtnChooseUpload;
     private Button BtnUploadImage;
-    private TextView ShowUploads;
     private EditText FileName;
     private ImageView Image;
     private android.widget.ProgressBar ProgressBar;
@@ -46,10 +45,8 @@ public class UploadImage extends AppCompatActivity {
 
         BtnChooseUpload = findViewById(R.id.BtnChooseImage);
         BtnUploadImage = findViewById(R.id.BtnUploadImage);
-        ShowUploads = findViewById(R.id.BtnShowUploads);
         FileName = findViewById(R.id.ETFileNme);
         Image = findViewById(R.id.ImageView);
-        ProgressBar = findViewById(R.id.ProgressUpload);
 
         userID = FirebaseAuth.getInstance().getUid();
         fStorage = FirebaseStorage.getInstance().getReference(userID);
@@ -65,13 +62,6 @@ public class UploadImage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ImageUploader();
-            }
-        });
-
-        ShowUploads.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
     }
