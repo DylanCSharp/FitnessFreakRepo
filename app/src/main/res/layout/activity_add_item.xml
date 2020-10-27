@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddItemActivity">
+    tools:context=".AddItemActivity"
+     >
 
     <TextView
         android:layout_width="match_parent"
@@ -12,7 +13,18 @@
         android:textSize="50dp"
         android:textColor="@color/cardview_dark_background"
         android:textAlignment="center"
+        android:id="@+id/TVAddItemHeading"
         >
     </TextView>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TVAddItemHeading"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="163dp"
+        android:text="Coming Soon..."
+        android:textSize="100sp" />
 
 </RelativeLayout>
