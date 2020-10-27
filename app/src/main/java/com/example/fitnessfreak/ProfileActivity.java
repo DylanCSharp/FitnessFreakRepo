@@ -65,9 +65,6 @@ public class ProfileActivity extends AppCompatActivity {
     private Button EditProfile;
     private Button BtnOpenUp;
 
-    private StorageReference fStorage;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
