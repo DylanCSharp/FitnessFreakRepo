@@ -111,5 +111,6 @@ public class ProfileActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, EditProfile.class);
         startActivity(intent);
+        finish();
     }
 }

@@ -123,7 +123,7 @@ public class EditProfile extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(getApplicationContext(), "Values have been edited and updated, and weight log has been stored!", Toast.LENGTH_SHORT).show();
-
+                            finish();
                         }
                     });
                 }
