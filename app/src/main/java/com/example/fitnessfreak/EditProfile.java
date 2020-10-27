@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -20,7 +22,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
 
@@ -93,7 +99,7 @@ public class EditProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(FirstName.getText()) || TextUtils.isEmpty(Surname.getText()) || TextUtils.isEmpty(CalorieGoal.getText()) || TextUtils.isEmpty(CurrentWeight.getText()) || TextUtils.isEmpty(GoalWeight.getText()) || TextUtils.isEmpty(Height.getText())) {
-                    Toast.makeText(getApplicationContext(), "Enter values for all the items above", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Enter values for all the items above!", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     DocumentReference documentReference = fStore.collection("Users").document(userID);
@@ -105,10 +111,24 @@ public class EditProfile extends AppCompatActivity {
                     documentReference.update("Height", Height.getText().toString());
                     documentReference.update("Sex", Sex.getSelectedItem().toString());
 
-                    Toast.makeText(getApplicationContext(), "Values have been edited and updated!", Toast.LENGTH_SHORT).show();
+                    final DocumentReference docRef = fStore.collection("Logs").document(userID);
+                    Map<String, Object> map = new HashMap<>();
+                    Date date = new Date();
+                    Timestamp timestamp = new Timestamp(date);
+                    Map<String, Object> arr = new HashMap<>();
+                    arr.put("Date", timestamp);
+                    arr.put("Weight", CurrentWeight.getText().toString());
+                    map.put("LogArray", Arrays.asList(arr));
 
-                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                    finish();
+                    docRef.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getApplicationContext(), "Values have been edited and updated, and weight log has been stored!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+
+
                 }
             }
         });

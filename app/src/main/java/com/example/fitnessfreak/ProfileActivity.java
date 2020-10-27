@@ -46,7 +46,6 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView Heading;
     private LinearLayout LinearLay;
     private Button EditProfile;
-    private static final String TAG = "ProfileActivity";
 
     private TextView Log;
 
