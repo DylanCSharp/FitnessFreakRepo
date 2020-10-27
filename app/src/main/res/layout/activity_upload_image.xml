@@ -14,6 +14,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Use Camera"
+        android:id="@+id/BtnCamera"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

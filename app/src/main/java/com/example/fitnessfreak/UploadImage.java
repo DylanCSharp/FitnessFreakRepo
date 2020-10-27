@@ -1,11 +1,19 @@
 package com.example.fitnessfreak;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
@@ -24,6 +32,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+
 public class UploadImage extends AppCompatActivity {
 
     private String userID;
@@ -35,6 +46,7 @@ public class UploadImage extends AppCompatActivity {
     private ImageView Image;
     private android.widget.ProgressBar ProgressBar;
     Uri imageUri;
+    private Button BtnCameraUpload;
 
     private StorageReference fStorage;
 
@@ -62,6 +74,20 @@ public class UploadImage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ImageUploader();
+            }
+        });
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(UploadImage.this, new String[] {
+                    Manifest.permission.CAMERA }, 100);
+        }
+
+        BtnCameraUpload = findViewById(R.id.BtnCamera);
+        BtnCameraUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 100);
             }
         });
     }
@@ -103,6 +129,8 @@ public class UploadImage extends AppCompatActivity {
         }
     }
 
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -112,5 +140,19 @@ public class UploadImage extends AppCompatActivity {
             imageUri = data.getData();
             Picasso.with(this).load(imageUri).into(Image);
         }
+        else if (requestCode == 100) {
+            Bitmap capturedImage = (Bitmap) data.getExtras().get("data");
+            Image.setImageBitmap(capturedImage);
+            imageUri = getImageUri(getApplicationContext(), capturedImage);
+        }
     }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+
 }
