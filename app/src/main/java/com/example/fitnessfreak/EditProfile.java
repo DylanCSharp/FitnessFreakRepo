@@ -2,6 +2,7 @@ package com.example.fitnessfreak;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -122,7 +123,7 @@ public class EditProfile extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(getApplicationContext(), "Values have been edited and updated, and weight log has been stored!", Toast.LENGTH_SHORT).show();
-                            finish();
+
                         }
                     });
                 }
