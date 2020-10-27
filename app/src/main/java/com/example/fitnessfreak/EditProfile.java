@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
@@ -112,21 +113,20 @@ public class EditProfile extends AppCompatActivity {
                     documentReference.update("Sex", Sex.getSelectedItem().toString());
 
                     final DocumentReference docRef = fStore.collection("Logs").document(userID);
-                    Map<String, Object> map = new HashMap<>();
                     Date date = new Date();
                     Timestamp timestamp = new Timestamp(date);
                     Map<String, Object> arr = new HashMap<>();
                     arr.put("Date", timestamp);
                     arr.put("Weight", CurrentWeight.getText().toString());
-                    map.put("LogArray", Arrays.asList(arr));
 
-                    docRef.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    docRef.update("LogArray", FieldValue.arrayUnion(arr)).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(getApplicationContext(), "Values have been edited and updated, and weight log has been stored!", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     });
+
 
 
                 }
