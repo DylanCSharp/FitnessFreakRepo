@@ -146,5 +146,6 @@ public class ProfileActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, UploadImage.class);
         startActivity(intent);
+        finish();
     }
 }
