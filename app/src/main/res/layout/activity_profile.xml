@@ -57,7 +57,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@id/TVGoalWeight"
         android:id="@+id/LinearLog">
         <TextView
             android:layout_marginTop="15dp"
@@ -69,8 +68,64 @@
     </LinearLayout>
     </ScrollView>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SVWeight"
+        android:padding="15dp">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose File"
+            android:id="@+id/BtnChooseImage"/>
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ETFileNme"
+            android:hint="Enter File Name"
+            android:layout_marginStart="120dp"
 
+            />
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ETFileNme"
+            android:layout_above="@+id/ProgressUpload"
+            android:id="@+id/ImageView"/>
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:id="@+id/ProgressUpload"
+            android:layout_above="@+id/BtnUploadImage"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="15dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload"
+            android:id="@+id/BtnUploadImage"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Uploads"
+            android:id="@+id/BtnShowUploads"
+            android:layout_alignBottom="@+id/BtnUploadImage"
+            android:layout_toEndOf="@+id/BtnUploadImage"
+            android:layout_alignTop="@+id/BtnUploadImage"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:clickable="true"
+            />
+
+    </RelativeLayout>
 </RelativeLayout>
