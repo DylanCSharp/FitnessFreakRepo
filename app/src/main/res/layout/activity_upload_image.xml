@@ -4,12 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UploadImage" android:layout_marginTop="150dp">
+    tools:context=".UploadImage">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload a Meal"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choose File"
-        android:id="@+id/BtnChooseImage"/>
+        android:id="@+id/BtnChooseImage"
+        android:layout_marginTop="150dp"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -17,7 +27,7 @@
         android:id="@+id/ETFileNme"
         android:hint="Enter File Name"
         android:layout_marginStart="120dp"
-
+        android:layout_marginTop="150dp"
         />
 
     <ImageView
@@ -25,8 +35,6 @@
         android:layout_height="300dp"
         android:layout_below="@+id/ETFileNme"
         android:id="@+id/ImageView"/>
-
-
 
     <Button
         android:layout_width="wrap_content"

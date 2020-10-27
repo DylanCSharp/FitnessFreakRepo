@@ -49,7 +49,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:id="@+id/SVWeight"
         android:layout_below="@+id/TVGoalWeight"
         >
@@ -62,7 +62,7 @@
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Weight Logs:"
+            android:text="Weight Logs: (Scroll)"
             android:textAlignment="center"
             />
     </LinearLayout>
@@ -75,6 +75,6 @@
         android:layout_below="@+id/SVWeight"
         android:layout_centerHorizontal="true"
         android:id="@+id/BtnOpenUpload">
-
     </Button>
+
 </RelativeLayout>

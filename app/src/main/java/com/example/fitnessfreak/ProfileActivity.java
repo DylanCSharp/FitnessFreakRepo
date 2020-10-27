@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -63,6 +64,8 @@ public class ProfileActivity extends AppCompatActivity {
     private LinearLayout LinearLay;
     private Button EditProfile;
     private Button BtnOpenUp;
+
+    private StorageReference fStorage;
 
 
     @Override
@@ -133,6 +136,9 @@ public class ProfileActivity extends AppCompatActivity {
                 openUploadActivity();
             }
         });
+
+
+
     }
 
     public void openEditProfileActivity()
