@@ -1,5 +1,6 @@
 package com.example.fitnessfreak;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -25,6 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
@@ -115,6 +117,11 @@ public class UploadImage extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Image Uploaded Successful", Toast.LENGTH_SHORT).show();
                     finish();
                 }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Image Uploaded Failed", Toast.LENGTH_SHORT).show();
+                }
             });
         }
         else {
@@ -124,6 +131,11 @@ public class UploadImage extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(getApplicationContext(), "Image Uploaded Successful", Toast.LENGTH_SHORT).show();
                     finish();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Image Uploaded Failed", Toast.LENGTH_SHORT).show();
                 }
             });
         }
