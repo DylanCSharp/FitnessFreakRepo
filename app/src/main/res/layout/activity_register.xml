@@ -4,69 +4,137 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".RegisterActivity" android:background="@color/black">
 
-    <EditText
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:hint="Enter Email"
-        android:textAlignment="center"
-        android:id="@+id/TxbRegisterEmail"
-        android:inputType="textEmailAddress"
-        >
-    </EditText>
+        android:layout_height="match_parent"
+        android:rowCount="1"
+        android:columnCount="1"
+        android:layout_margin="5dp"
+        android:alignmentMode="alignMargins"
+        android:layout_gravity="center_horizontal"
+        android:columnOrderPreserved="false"
+        android:background="@color/black">
 
-    <EditText
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_below="@+id/TxbRegisterEmail"
-        android:hint="Enter Password"
-        android:textAlignment="center"
-        android:layout_marginTop="20dp"
-        android:id="@+id/TxbRegisterPassword"
-        android:inputType="textPassword"
-        >
-    </EditText>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/TxbRegisterPassword"
-        android:layout_marginTop="20dp"
-        android:text="REGISTER"
-        android:id="@+id/BtnRegister"
-        >
-    </Button>
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/RegisterProgress"
-        android:layout_below="@+id/TVSignIN"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:visibility="invisible"
-        >
-    </ProgressBar>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/TVSignIN"
-        android:text="Already have an account? Sign In."
-        android:textColor="@color/common_google_signin_btn_text_light"
-        android:layout_below="@+id/BtnRegister"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="5dp"
+        app:cardBackgroundColor="@color/grey"
+        android:layout_margin="10dp"
         android:clickable="true"
+        android:id="@+id/BtnCardProfile"
         >
-    </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:background="@color/grey"
+            android:layout_marginTop="100dp"
+            >
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/loginfitness"
+                android:background="@color/grey">
+
+            </ImageView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register to Fitness Freak!"
+                android:background="@color/grey"
+                android:textColor="@color/white"
+                android:textSize="20sp"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:hint="Enter Email"
+                android:textAlignment="center"
+                android:id="@+id/TxbRegisterEmail"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:layout_marginTop="70dp"
+                >
+            </EditText>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_below="@+id/TxbRegisterEmail"
+                android:hint="Enter Password"
+                android:textAlignment="center"
+                android:layout_marginTop="20dp"
+                android:id="@+id/TxbRegisterPassword"
+                android:inputType="textPassword"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                >
+            </EditText>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/TxbRegisterPassword"
+                android:layout_marginTop="20dp"
+                android:text="REGISTER"
+                android:id="@+id/BtnRegister"
+                android:background="@color/black"
+                android:textColor="@color/white"
+                >
+            </Button>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TVSignIN"
+                android:text="Already have an account? Sign In."
+                android:textColor="@color/white"
+                android:layout_below="@+id/BtnRegister"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:clickable="true"
+                android:background="@color/grey"
+
+                >
+            </TextView>
+
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/RegisterProgress"
+                android:layout_below="@+id/TVSignIN"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:visibility="invisible"
+                android:background="@color/grey"
+                >
+            </ProgressBar>
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</GridLayout>
 
 </RelativeLayout>
