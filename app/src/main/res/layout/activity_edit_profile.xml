@@ -56,17 +56,7 @@
                         android:textColor="@color/white"
                         android:textSize="30sp" />
 
-                    <EditText
-                        android:id="@+id/ETEditCalorieGoal"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/ETEditSurname"
-                        android:layout_marginTop="20dp"
-                        android:hint="Calorie Goal"
-                        android:inputType="number"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"/>
+
                     <EditText
                         android:id="@+id/ETEditFirstName"
                         android:layout_width="150dp"
@@ -86,6 +76,30 @@
                         android:layout_below="@+id/ETEditFirstName"
                         android:layout_marginTop="15dp"
                         android:hint="Surname"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        />
+
+                    <EditText
+                        android:id="@+id/ETEditCalorieGoal"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/ETEditSurname"
+                        android:layout_marginTop="20dp"
+                        android:hint="Calorie Goal"
+                        android:inputType="number"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"/>
+                    <EditText
+                        android:id="@+id/ETEditCurrentWeight"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:hint="Current Weight"
+                        android:layout_below="@+id/ETEditCalorieGoal"
+                        android:inputType="number"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
                         />
@@ -120,47 +134,11 @@
                         android:layout_below="@+id/ETEditHeight"
                         android:layout_marginTop="25dp"
                         />
-
-                    <EditText
-                        android:id="@+id/ETEditCurrentWeight"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        android:hint="Current Weight"
-                        android:layout_below="@+id/ETEditCalorieGoal"
-                        android:inputType="number"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/EditSpinSex"
-                        android:id="@+id/TVMeasurement"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="25dp"
-                        android:text="Measurements: (Left = Imperial, Right = Metric)"
-                        android:textColor="@color/white"
-                        android:background="@color/grey"
-                       />
-
-
-                    <Switch
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/TVMeasurement"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/SwitchMeasure"
-
-                        />
-
                     <Button
                         android:id="@+id/BtnSaveEdit"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_below="@id/SwitchMeasure"
                         android:text="SAVE"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"/>

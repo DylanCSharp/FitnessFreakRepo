@@ -55,16 +55,7 @@
         android:textSize="30sp"
         android:layout_marginTop="10dp"/>
 
-        <EditText
-            android:id="@+id/ETDataCalorieGoal"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/ETDataSurname"
-            android:layout_marginTop="40dp"
-            android:hint="Calorie Goal"
-            android:inputType="number" android:textColor="@color/white"
-            android:textColorHint="@color/white"/>
+
 
         <EditText
             android:id="@+id/ETDataFirstName"
@@ -84,6 +75,29 @@
             android:layout_below="@+id/ETDataFirstName"
             android:layout_marginTop="15dp"
             android:hint="Surname"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            />
+
+        <EditText
+            android:id="@+id/ETDataCalorieGoal"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/ETDataSurname"
+            android:layout_marginTop="20dp"
+            android:hint="Calorie Goal"
+            android:inputType="number" android:textColor="@color/white"
+            android:textColorHint="@color/white"/>
+
+        <EditText
+            android:id="@+id/ETDataCurrentWeight"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:hint="Current Weight"
+            android:inputType="number"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             />
@@ -119,18 +133,6 @@
             android:layout_marginTop="25dp"
             />
 
-        <EditText
-            android:id="@+id/ETDataCurrentWeight"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:hint="Current Weight"
-            android:layout_below="@+id/ETDataCalorieGoal"
-            android:inputType="number"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            />
 
         <Button
             android:id="@+id/BtnGatherData"
