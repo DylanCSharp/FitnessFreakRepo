@@ -4,79 +4,135 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".ProfileActivity"
+    android:background="@color/black">
 
-    <TextView
-        android:id="@+id/TVProfileHeading"
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="PROFILE"
-        android:textAlignment="center"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="30dp"/>
+        android:layout_height="match_parent"
+        android:rowCount="5"
+        android:columnCount="1"
+        android:layout_margin="5dp"
+        android:alignmentMode="alignMargins"
+        android:layout_gravity="center_horizontal"
+        android:columnOrderPreserved="false"
+        android:background="@color/black">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/TVProfileHeading"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        android:textAlignment="center"
-        android:text="Edit Profile"
-        android:textAllCaps="false"
-        android:id="@+id/BtnEditProfile"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Current Weight: "
-        android:id="@+id/TVCurrentWeight"
-        android:layout_below="@+id/TVProfileHeading"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Goal Weight: "
-        android:id="@+id/TVGoalWeight"
-        android:layout_below="@+id/TVCurrentWeight"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        />
-
-    <ScrollView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:id="@+id/SVWeight"
-        android:layout_below="@+id/TVGoalWeight"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="5dp"
+        app:cardBackgroundColor="@color/grey"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:id="@+id/BtnCardProfile"
         >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/LinearLog">
-        <TextView
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Weight Logs: (Scroll)"
-            android:textAlignment="center"
-            />
-    </LinearLayout>
-    </ScrollView>
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:background="@color/grey"
+            >
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Upload Image"
-        android:layout_below="@+id/SVWeight"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/BtnOpenUpload"
-        android:layout_marginTop="50dp">
-    </Button>
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/profile"
+                android:background="@color/grey"
+                android:id="@+id/ImageProfile">
+            </ImageView>
+            <TextView
+                android:id="@+id/TVProfileHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PROFILE"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:background="@color/grey"/>
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:textAlignment="center"
+                android:text="Edit Profile"
+                android:textAllCaps="false"
+                android:id="@+id/BtnEditProfile"
+                android:background="@color/black"
+                android:textColor="@color/white"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Weight: "
+                android:id="@+id/TVCurrentWeight"
+                android:layout_below="@+id/TVProfileHeading"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:background="@color/grey"
+                android:textColor="@color/white"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Goal Weight: "
+                android:id="@+id/TVGoalWeight"
+                android:layout_below="@+id/TVCurrentWeight"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@color/grey"
+                android:textColor="@color/white"
+                />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/SVWeight"
+                android:layout_below="@+id/TVGoalWeight"
+                android:background="@color/grey"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/LinearLog"
+                    android:background="@color/grey">
+                    <TextView
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Weight Logs: (Scroll)"
+                        android:textAlignment="center"
+                        android:background="@color/grey"
+                        android:textColor="@color/white"
+                        />
+                </LinearLayout>
+            </ScrollView>
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Upload Meal Image"
+                android:layout_below="@+id/SVWeight"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/BtnOpenUpload"
+                android:layout_marginTop="50dp"
+                android:background="@color/black"
+                android:textColor="@color/white"
+                android:textAllCaps="false">
+            </Button>
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    </GridLayout>
 </RelativeLayout>

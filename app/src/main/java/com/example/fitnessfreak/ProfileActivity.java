@@ -2,6 +2,7 @@ package com.example.fitnessfreak;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -111,6 +112,7 @@ public class ProfileActivity extends AppCompatActivity {
                             textView.setText(entry.getValue().toString());
                             textView.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
                             textView.setGravity(Gravity.CENTER);
+                            textView.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
                             LinearLay.addView(textView);
                         }
                     }
