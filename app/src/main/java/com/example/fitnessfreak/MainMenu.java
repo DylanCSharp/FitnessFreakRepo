@@ -1,6 +1,7 @@
 package com.example.fitnessfreak;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -21,10 +22,10 @@ import javax.annotation.Nullable;
 
 public class MainMenu extends AppCompatActivity {
 
-    private Button BtnRecipeLoad;
-    private Button BtnAddItem;
-    private Button BtnWorkoutLoad;
-    private Button BtnProfileLoad;
+    private CardView BtnRecipeLoad;
+    private CardView BtnAddItem;
+    private CardView BtnWorkoutLoad;
+    private CardView BtnProfileLoad;
     private TextView Heading;
     private String userID;
 
@@ -54,7 +55,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
         //LOADING THE MAIN RECIPE SCREEN WHEN USER CLICKS TO VIEW RECIPES BUTTON
-        BtnRecipeLoad = findViewById(R.id.BtnMainRecipe);
+        BtnRecipeLoad = findViewById(R.id.BtnCardRecipe);
         BtnRecipeLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -64,7 +65,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
         //LOADING THE PARENT ADD ITEM FORM WHEN THE USER CLICKS ADD ITEMS BUTTON
-        BtnAddItem = findViewById(R.id.BtnMainAdd);
+        BtnAddItem = findViewById(R.id.BtnCardAddItem);
         BtnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +74,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
         //LOADING THE WORKOUT TAB WHEN THE USER CLICKS ON WORKOUT BUTTON
-        BtnWorkoutLoad = findViewById(R.id.BtnMainWorkout);
+        BtnWorkoutLoad = findViewById(R.id.BtnCardWorkout);
         BtnWorkoutLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +82,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        BtnProfileLoad = findViewById(R.id.BtnMainProfile);
+        BtnProfileLoad = findViewById(R.id.BtnCardProfile);
         BtnProfileLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
