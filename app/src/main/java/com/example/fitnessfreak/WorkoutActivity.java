@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -29,6 +30,8 @@ public class WorkoutActivity extends AppCompatActivity {
 
         fStore = FirebaseFirestore.getInstance();
 
+        try {
+            //Getting the workout document and displaying the fields into the text views
         DocumentReference documentReference = fStore.collection("Workout").document("Week 1");
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
@@ -37,5 +40,10 @@ public class WorkoutActivity extends AppCompatActivity {
                 EveningWork.setText(documentSnapshot.getString("Evening Workout"));
             }
         });
+        }
+         catch (Exception ex)
+         {
+             Toast.makeText(this, "ERROR" + ex.getMessage(), Toast.LENGTH_SHORT).show();
+         }
     }
 }

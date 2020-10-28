@@ -1,5 +1,6 @@
 package com.example.fitnessfreak;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,6 +59,7 @@ public class DataGathering extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_gathering);
 
+        //Initializing all the variables
         ButtonMainActivity = findViewById(R.id.BtnGatherData);
         CalorieGoal = findViewById(R.id.ETDataCalorieGoal);
         FirstName = findViewById(R.id.ETDataFirstName);
@@ -65,6 +68,7 @@ public class DataGathering extends AppCompatActivity {
         CurrentWeight = findViewById(R.id.ETDataCurrentWeight);
         Height = findViewById(R.id.ETDataHeight);
 
+        //Initialising the spinner and then adding an array to the spinner of male and female
         Sex = findViewById(R.id.SpinSex);
         List<String> gender = new ArrayList<>();
         String male = "Male";
@@ -72,6 +76,7 @@ public class DataGathering extends AppCompatActivity {
         gender.add(male);
         gender.add(female);
 
+        //Setting an adapter so that the spinner displays dropdown items in the array
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, gender);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Sex.setAdapter(adapter);
@@ -79,12 +84,15 @@ public class DataGathering extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
 
+        //Getting the current user id of the user that is currently logged in
         userID = fAuth.getCurrentUser().getUid();
 
         ButtonMainActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+            try {
+                //Setting all the variables
                 String calorieGoal = CalorieGoal.getText().toString();
                 String firstName = FirstName.getText().toString();
                 String surname = Surname.getText().toString();
@@ -93,13 +101,17 @@ public class DataGathering extends AppCompatActivity {
                 String gender = Sex.getSelectedItem().toString();
                 String height = Height.getText().toString();
 
-                if (TextUtils.isEmpty(calorieGoal) || TextUtils.isEmpty(firstName) || TextUtils.isEmpty(surname) || TextUtils.isEmpty(goalWeight) || TextUtils.isEmpty(currentWeight) || TextUtils.isEmpty(gender) || TextUtils.isEmpty(height))
+                //Making sure the user enters values for the fields
+                if (TextUtils.isEmpty(calorieGoal) || TextUtils.isEmpty(firstName) || TextUtils.isEmpty(surname) || TextUtils.isEmpty(goalWeight) || TextUtils.isEmpty(currentWeight) || TextUtils.isEmpty(gender) || TextUtils.isEmpty(height) || calorieGoal == "" || firstName == "" || surname == "" || goalWeight == "" || currentWeight == "" || gender == "" || height == "")
                 {
                     Toast toast = Toast.makeText(getApplicationContext(), "Values need to be entered for all the fields above to continue!", Toast.LENGTH_SHORT);
                     toast.show();
+                    return;
                 }
                 else {
+                    //Creating a document with the document being called the users id so that it is unique to the user
                     DocumentReference documentReference = fStore.collection("Users").document(userID);
+                    //Creating a hash map and then pushing this hash map to the document
                     Map<String, Object> user = new HashMap<>();
                     user.put("Calorie Goal", calorieGoal);
                     user.put("Email", Email = fAuth.getCurrentUser().getEmail());
@@ -110,33 +122,60 @@ public class DataGathering extends AppCompatActivity {
                     user.put("Sex", gender);
                     user.put("Weight", currentWeight);
 
+                    //Letting the user know if their data has been saved
                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast toast = Toast.makeText(getApplicationContext(), "Data has been gathered and stored!", Toast.LENGTH_SHORT);
                             toast.show();
                         }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            //Tells the user if something has failed
+                            Toast toast = Toast.makeText(getApplicationContext(), "ERROR: Data has NOT been gathered!", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
                     });
 
+                    //Creating the users first weight log
                     DocumentReference docRef = fStore.collection("Logs").document(userID);
+
+
                     Map<String, Object> map = new HashMap<>();
+
+
                     Date date = new Date();
                     Timestamp timestamp = new Timestamp(date);
+                    //Creating an map and populating it with date and weight, then adding that map to another map called LogArray, which stores the date and weight map as an array
                     Map<String, Object> arr = new HashMap<>();
-                    arr.put("Date", timestamp);
+                    arr.put("Date", timestamp.toDate());
                     arr.put("Weight", currentWeight);
                     map.put("LogArray", Arrays.asList(arr));
 
+                    //Letting the user know if it was successful or failed and then displaying relevant toast message
                     docRef.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast toast = Toast.makeText(getApplicationContext(), "First Log has been Captured!", Toast.LENGTH_SHORT);
                             toast.show();
                         }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "First Log has not been captured!", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
                     });
                 }
                 startActivity(new Intent(getApplicationContext(), MainMenu.class));
                 finish();
+            }
+            catch (Exception ex)
+            {
+                Toast toast = Toast.makeText(getApplicationContext(), "ERROR: " +ex.getMessage(), Toast.LENGTH_SHORT);
+                toast.show();
+            }
             }
         });
     }

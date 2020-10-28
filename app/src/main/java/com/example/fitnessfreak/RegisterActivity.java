@@ -39,50 +39,56 @@ public class RegisterActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.RegisterProgress);
 
+        //Checking if there isnt already a user logged in
         if (fAuth.getCurrentUser() != null)
         {
             startActivity(new Intent(getApplicationContext(), MainMenu.class));
             finish();
         }
 
-        mRegisterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = mRegisterEmail.getText().toString().trim();
-                String password = mRegisterPassword.getText().toString().trim();
+        try {
+            //Getting the users desired email and password, then checking them to see if they have entered something
+            mRegisterButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String email = mRegisterEmail.getText().toString().trim();
+                    String password = mRegisterPassword.getText().toString().trim();
 
-                if (TextUtils.isEmpty(email))
-                {
-                    mRegisterEmail.setError("Email is required");
-                    return;
-                }
-                if(TextUtils.isEmpty(password))
-                {
-                    mRegisterPassword.setError("Password is required");
-                    return;
-                }
-                if (password.length() < 6)
-                {
-                    mRegisterPassword.setError("Password must be more than 6 characters");
-                }
-
-                progressBar.setVisibility(View.VISIBLE);
-
-                fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful())
-                        {
-                            Toast.makeText(RegisterActivity.this, "Welcome! User has been Created.", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), DataGathering.class));
-                        }
-                        else {
-                            Toast.makeText(RegisterActivity.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                    if (TextUtils.isEmpty(email)) {
+                        mRegisterEmail.setError("Email is required");
+                        return;
                     }
-                });
-            }
-        });
+                    if (TextUtils.isEmpty(password)) {
+                        mRegisterPassword.setError("Password is required");
+                        return;
+                    }
+                    if (password.length() < 6) {
+                        mRegisterPassword.setError("Password must be more than 6 characters");
+                        return;
+                    }
+
+                    //Makeing the progress bar visible
+                    progressBar.setVisibility(View.VISIBLE);
+
+                    //Creating a new user with a built in firebase authentication method
+                    fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                //Lauching a data gathering activity so that the user has data
+                                Toast.makeText(RegisterActivity.this, "Welcome! User has been Created.", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), DataGathering.class));
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            });
+        }catch (Exception ex)
+        {
+            Toast.makeText(getApplicationContext(), "ERROR: " +ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
         mSignIn.setOnClickListener(new View.OnClickListener() {
             @Override

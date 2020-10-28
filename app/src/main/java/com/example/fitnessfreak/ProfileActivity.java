@@ -82,62 +82,84 @@ public class ProfileActivity extends AppCompatActivity {
 
         userID = fAuth.getCurrentUser().getUid();
 
-        EditProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openEditProfileActivity();
-            }
-        });
+        try {
+            EditProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Opening a new activity where they can edit their profile
+                    openEditProfileActivity();
+                }
+            });
 
-        DocumentReference documentReference = fStore.collection("Users").document(userID);
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                Current.setText("Current Weight: " + documentSnapshot.getString("Weight"));
-                Goal.setText("Goal Weight: " + documentSnapshot.getString("Goal Weight"));
-                Heading.setText("User Profile:\n " + documentSnapshot.getString("Email") +"!");
-            }
-        });
+            //Setting the text on the profile to the values stored for the current user
+            DocumentReference documentReference = fStore.collection("Users").document(userID);
+            documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+                @SuppressLint("SetTextI18n")
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                    Current.setText("Current Weight: " + documentSnapshot.getString("Weight"));
+                    Goal.setText("Goal Weight: " + documentSnapshot.getString("Goal Weight"));
+                    Heading.setText("User Profile:\n " + documentSnapshot.getString("Email") + "!");
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(getApplicationContext(), "ERROR: " +ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
-        FirebaseFirestore.getInstance().collection("Logs").document(userID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    Map<String, Object> map = documentSnapshot.getData();
-                    for (Map.Entry<String, Object> entry : map.entrySet()) {
-                        if (entry.getKey().equals("LogArray")) {
-                            TextView textView = new TextView(getApplicationContext());
-                            textView.setText(entry.getValue().toString());
-                            textView.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-                            textView.setGravity(Gravity.CENTER);
-                            textView.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
-                            LinearLay.addView(textView);
+        try {
+            //Getting the weight logs from a map within an array in fire store by getting the collection
+            //then getting the document which is the current users user id
+            //then searching for the array called log array
+            //then searching for the values within that log array and displaying that to the user as those are the previously stored weight logs
+            FirebaseFirestore.getInstance().collection("Logs").document(userID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        Map<String, Object> map = documentSnapshot.getData();
+                        for (Map.Entry<String, Object> entry : map.entrySet()) {
+                            if (entry.getKey().equals("LogArray")) {
+                                TextView textView = new TextView(getApplicationContext());
+                                textView.setText(entry.getValue().toString());
+                                textView.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+                                textView.setGravity(Gravity.CENTER);
+                                textView.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                                LinearLay.addView(textView);
+                            }
                         }
+                    } else {
+                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
-                else {
-                    Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                    //Shows the user a text view if they don't have any stored weight logs
+                    TextView textView = new TextView(getApplicationContext());
+                    textView.setText("No Weight Logs");
+                    textView.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+                    textView.setGravity(Gravity.CENTER);
+                    textView.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
+                    LinearLay.addView(textView);
+                    Toast.makeText(ProfileActivity.this, "User has no logs!", Toast.LENGTH_SHORT).show();
                 }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(ProfileActivity.this, "User has no logs!", Toast.LENGTH_SHORT).show();
-            }
-        });
+            });
 
-        BtnOpenUp = findViewById(R.id.BtnOpenUpload);
-        BtnOpenUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openUploadActivity();
-            }
-        });
-
-
-
+            BtnOpenUp = findViewById(R.id.BtnOpenUpload);
+            BtnOpenUp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Starting a new activity
+                    openUploadActivity();
+                }
+            });
+        }catch (Exception ex)
+        {
+            Toast.makeText(getApplicationContext(), "ERROR: " +ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void openEditProfileActivity()

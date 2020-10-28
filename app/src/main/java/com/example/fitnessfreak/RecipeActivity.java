@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,22 +33,29 @@ public class RecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
+        //Instantiating the variables
         Breakfast = findViewById(R.id.TVBreakfast);
         Lunch = findViewById(R.id.TVLunch);
         Dinner = findViewById(R.id.TVDinner);
 
         fStore = FirebaseFirestore.getInstance();
 
-        DocumentReference documentReference = fStore.collection("Recipes").document("Week 1");
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                Breakfast.setText(documentSnapshot.getString("Breakfast"));
-                Lunch.setText(documentSnapshot.getString("Lunch"));
-                Dinner.setText(documentSnapshot.getString("Dinner"));
-            }
-        });
-
+        try {
+            //Getting the document reference for recipes and then setting text views to the fields
+            DocumentReference documentReference = fStore.collection("Recipes").document("Week 1");
+            documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                    Breakfast.setText(documentSnapshot.getString("Breakfast"));
+                    Lunch.setText(documentSnapshot.getString("Lunch"));
+                    Dinner.setText(documentSnapshot.getString("Dinner"));
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(getApplicationContext(), "ERROR: " +ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
 
 

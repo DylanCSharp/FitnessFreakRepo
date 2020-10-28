@@ -65,42 +65,73 @@ public class UploadImage extends AppCompatActivity {
         userID = FirebaseAuth.getInstance().getUid();
         fStorage = FirebaseStorage.getInstance().getReference(userID);
 
+        try {
         BtnChooseUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Directs the on click to this method
                 openFileChooser();
             }
         });
-
-        BtnUploadImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageUploader();
-            }
-        });
-
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(UploadImage.this, new String[] {
-                    Manifest.permission.CAMERA }, 100);
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(getApplicationContext(), "ERROR: " +ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
+        try {
+            BtnUploadImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Directs the on click to this method
+                    ImageUploader();
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(getApplicationContext(), "ERROR: " +ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+        try {
+            //Asks the user for permission to the camera, and if the permissions is false, it will ask again
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(UploadImage.this, new String[] {
+                    Manifest.permission.CAMERA }, 100);
+            }
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(getApplicationContext(), "ERROR: " +ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+        try
+        {
         BtnCameraUpload = findViewById(R.id.BtnCamera);
         BtnCameraUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Starting a new intent and opens the camera so the user can take a photo
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 100);
             }
         });
+        }catch (Exception ex)
+        {
+            Toast.makeText(getApplicationContext(), "ERROR: " +ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void openFileChooser()
     {
+        //Opens the gallery so that a user can choose an existing image
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
     private String getExtension(Uri uri) {
+        //Getting the extension of the uri that is chosen
         ContentResolver cr = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(cr.getType(uri));
@@ -108,23 +139,38 @@ public class UploadImage extends AppCompatActivity {
 
     public void ImageUploader()
     {
-        if (TextUtils.isEmpty(FileName.getText())){
-            FileName.setText("NoName" + System.currentTimeMillis());
-            StorageReference ref = fStorage.child(FileName.getText() + "." + getExtension(imageUri));
-            ref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(getApplicationContext(), "Image Uploaded Successful", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getApplicationContext(), "Image Uploaded Failed", Toast.LENGTH_SHORT).show();
-                }
-            });
+        //Making sure the user is entering an image when submitting
+        if (TextUtils.isEmpty(FileName.getText()) && imageUri != null){
+
+            try {
+                //Sets a file name if one isnt already entered
+                //Creates a folder in firebase storage for the specific user entering their images
+                FileName.setText("ImgNoName" + System.currentTimeMillis());
+                StorageReference ref = fStorage.child(FileName.getText() + "." + getExtension(imageUri));
+                ref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        //Telling the user if the upload was successful or failed
+                        Toast.makeText(getApplicationContext(), "Image Uploaded Successful", Toast.LENGTH_SHORT).show();
+                        finish();
+                        return;
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Image Uploaded Failed", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                Toast.makeText(getApplicationContext(), "ERROR: " +ex.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         }
         else {
+            try{
+                //Uploading the image with the selected file name they chose
             StorageReference ref = fStorage.child(FileName.getText() + "." + getExtension(imageUri));
             ref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -138,6 +184,10 @@ public class UploadImage extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Image Uploaded Failed", Toast.LENGTH_SHORT).show();
                 }
             });
+            }catch (Exception ex)
+            {
+                Toast.makeText(getApplicationContext(), "ERROR: " +ex.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -147,19 +197,27 @@ public class UploadImage extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        try {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null)
         {
+            //Loading the image view with the uri with the picasso implementation so that the user can preview what theyre uploading
             imageUri = data.getData();
             Picasso.with(this).load(imageUri).into(Image);
         }
         else if (requestCode == 100) {
+            //Loading the image view with the uri with the picasso implementation so that the user can preview what theyre uploading
             Bitmap capturedImage = (Bitmap) data.getExtras().get("data");
             Image.setImageBitmap(capturedImage);
             imageUri = getImageUri(getApplicationContext(), capturedImage);
+        } }
+        catch (Exception ex)
+        {
+            Toast.makeText(getApplicationContext(), "ERROR: " +ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
+        //Converting the bitmap to a uri format so that it can be uploaded to firebase
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
